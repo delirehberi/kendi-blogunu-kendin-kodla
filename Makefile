@@ -29,3 +29,6 @@ shell:
 
 db:
 	docker-compose -f $(DOCKER_COMPOSE_FILE) exec $(DATABASE_SERVICE) bash
+
+migrate:
+	docker-compose -f $(DOCKER_COMPOSE_FILE) run --rm $(PHP_SERVICE) /app/bin/console doctrine:migration:migrate -n
