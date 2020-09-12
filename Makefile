@@ -29,6 +29,16 @@ shell:
 
 db:
 	docker-compose -f $(DOCKER_COMPOSE_FILE) exec $(DATABASE_SERVICE) bash
+db-remove:
+	docker-compose -f $(DOCKER_COMPOSE_FILE) run --rm $(PHP_SERVICE) /app/bin/console doctrine:database:drop --force
+
+db-create:
+	docker-compose -f $(DOCKER_COMPOSE_FILE) run --rm $(PHP_SERVICE) /app/bin/console doctrine:database:create
+
+db-reset: db-remove db-create migrate load-fixtures 
 
 migrate:
 	docker-compose -f $(DOCKER_COMPOSE_FILE) run --rm $(PHP_SERVICE) /app/bin/console doctrine:migration:migrate -n
+
+load-fixtures:
+	docker-compose -f $(DOCKER_COMPOSE_FILE) run --rm $(PHP_SERVICE) /app/bin/console doctrine:fixtures:load -n
