@@ -3,10 +3,42 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
+        <link rel="stylesheet" href="{{asset('assets/bootstrap-4.5.2-dist/css/bootstrap.min.css')}}" type="text/css" media="all">
+        <link rel="stylesheet" href="{{asset('assets/css/style.css')}}" type="text/css" media="all">
         {% block stylesheets %}{% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
+        <!-- Navigation -->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+            <div class="container">
+                <a class="navbar-brand" href="{{path('default')}}">emre.xyz</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="{{path('default')}}">Anasayfa
+                                <span class="sr-only">(current)</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="container">
+            <div class="row">
+                {% block body %}{% endblock %}
+            </div>
+        </div>
+        <!-- Footer -->
+        <footer class="py-5 bg-dark">
+            <div class="container">
+                <p class="m-0 text-center text-white">Copyright &copy; Emre YILMAZ 2020</p>
+            </div>
+            <!-- /.container -->
+        </footer>
+        <script src="{{asset('assets/bootstrap-4.5.2-dist/js/bootstrap.min.js')}}" charset="utf-8"></script>
         {% block javascripts %}{% endblock %}
     </body>
 </html>
