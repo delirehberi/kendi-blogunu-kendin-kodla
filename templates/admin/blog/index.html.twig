@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tüm İçerikler{% endblock %}
+
+{% block body %}
+{%include 'admin/menu.html.twig'%}
+<table class="col-md-12 table table-hovered">
+    <thead>
+        <tr>
+        <th>ID</th>
+        <th>Başlık</th>
+        <th>Tarih</th>
+        <th>İşlemler</th>
+            </tr>
+    </thead>
+    <tbody>
+        {% for item in items %}
+        <tr>
+            <td>{{item.id}}</td>
+            <td>{{item.title}}</td>
+            <td>{{item.createdAt|date}}</td>
+            <td>
+                <a href="{{path('admin_blog_create',{id: item.id})}}" class="btn btn-secondary">Düzenle</a>
+                <a href="{{path('admin_blog_remove',{id: item.id})}}" class="btn btn-danger" onclick="return confirm('İçeriği silmek istediğinizden emin misiniz?')">Sil</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>    
+</table>
+{% endblock %}

@@ -1,0 +1,14 @@
+<div class="col-md-12">
+<hr>
+<a href="{{path('admin_blog')}}" class="btn btn-primary">Tüm İçerikler</a>
+<a href="{{path('admin_blog_create')}}" class="btn btn-primary">Yeni İçerik Ekle</a>
+<hr>
+</div>
+{% for label, messages in app.flashes %}
+    {% for message in messages %}
+    <div class="alert alert-{{label}}">
+        {{message}}
+    </div>
+    {% endfor %}
+{% endfor %}
+

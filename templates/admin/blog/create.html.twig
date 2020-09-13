@@ -1,0 +1,21 @@
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Yeni İçerik Ekle{% endblock %}
+
+{% block body %}
+{%include 'admin/menu.html.twig'%}
+<form class="col-md-12" method="post">
+    <div class="form-group">
+        <label for="title">Başlık</label>
+        <input type="text" id="title" name="title" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label for="content">İçerik</label>
+        <textarea rows=20 class="form-control" id="content" name="content"></textarea>
+    </div>
+    <div class="form-group">
+        <input type="submit" class="btn btn-block btn-primary" value="Kaydet"/>
+    </div>
+</form>
+{% endblock %}
