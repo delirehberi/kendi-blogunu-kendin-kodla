@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+{% import "macro/blog.html.twig" as blog_macro %}
+
+{% block title %}Emre.xyz{% endblock %}
+
+{% block body %}
+<div class="col-md-12">
+    <h1 class="my-4">Son Yazılar
+        <small>en son yazılar</small>
+    </h1>
+    {% for item in items %}
+    {{blog_macro.item(item)}}
+    {% endfor %}
+
+</div>
+{% endblock %}

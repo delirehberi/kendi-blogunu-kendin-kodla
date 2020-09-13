@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Emre.xyz{% endblock %}
+
+{% block body %}
+<div class="col-md-12">
+    <!-- Title -->
+    <h1 class="mt-4">{{item.title}}</h1>
+
+    <hr>
+
+    <!-- Date/Time -->
+    <p>Tarih: {{item.createdAt|date}}</p>
+
+    <hr>
+
+    <!-- Post Content -->
+    {{item.content|raw}}
+    <hr>
+</div>
+{% endblock %}

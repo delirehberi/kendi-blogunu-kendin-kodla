@@ -1,0 +1,12 @@
+{% macro item(post)%}
+<div class="card mb-4">
+    <div class="card-body">
+        <h2 class="card-title">{{post.title}}</h2>
+        <p class="card-text">{{post.content[:200]}}</p>
+        <a href="{{path("blog_detail",{slug: post.slug})}}" class="btn btn-primary">Devamını oku&rarr;</a>
+    </div>
+    <div class="card-footer text-muted">
+        Tarih: {{post.createdAt|date}}
+    </div>
+</div>
+{%endmacro%}
