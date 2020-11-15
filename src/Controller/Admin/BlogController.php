@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Blog;
+use App\Form\BlogType;
 use Cocur\Slugify\Slugify;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -35,32 +36,28 @@ class BlogController extends AbstractController
             $blog_item = $em->find(Blog::class,$id)??$blog_item;
         }
 
-        if($request->isMethod('POST')) {
-            $title = $request->get('title');
-            $content = $request->get('content');
-            try{
-                if(!empty($title)) {
-                    $slugify = new Slugify();
-                    $slug = $slugify->slugify($title);
-                    $blog_item->setTitle($title)
-                              ->setSlug($slug)
-                              ->setContent($content);
+        $form = $this->createForm(BlogType::class,$blog_item);
+        $form->handleRequest($request);
 
-                    if(!$blog_item->getId()) {
-                        $blog_item->setCreatedAt(new \DateTime());
-                    }
 
-                    $em->persist($blog_item);
-                    $em->flush();
-                    $this->addFlash('success',"İçerik başarıyla kaydedildi!");
-                    return $this->redirectToRoute('admin_blog');
-                }
-                throw new \Exception("Başlık eklemek zorunludur.");
-            }catch(\Exception $e) {
-                $this->addFlash('danger',$e->getMessage());
+        if($form->isSubmitted() && $form->isValid()) {
+            $slugify = new Slugify();
+            $slug = $slugify->slugify($blog_item->getTitle());
+            $blog_item->setSlug($slug);
+
+            if(!$blog_item->getId()) {
+                $blog_item->setCreatedAt(new \DateTime());
             }
+
+            $em->persist($blog_item);
+            $em->flush();
+            $this->addFlash('success',"İçerik başarıyla kaydedildi!");
+            return $this->redirectToRoute('admin_blog');
         }
-        return $this->render('admin/blog/create.html.twig',[]);
+
+        return $this->render('admin/blog/create.html.twig',[
+            'form'=>$form->createView()
+        ]);
     }
     /**
      * @Route("/admin/blog/remove/{id}",name="admin_blog_remove")
