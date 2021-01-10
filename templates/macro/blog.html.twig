@@ -7,6 +7,10 @@
     </div>
     <div class="card-footer text-muted">
         Tarih: {{post.createdAt|date}}
+        {%if post.category%}
+        |
+        Kategori: {{post.category}}
+        {%endif%}
     </div>
 </div>
 {%endmacro%}

@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tüm Kategoriler{% endblock %}
+
+{% block body %}
+{%include 'admin/menu.html.twig'%}
+<table class="col-md-12 table table-hovered">
+    <thead>
+        <tr>
+        <th>ID</th>
+        <th>İsim</th>
+        <th>Yol</th>
+        <th>İşlemler</th>
+            </tr>
+    </thead>
+    <tbody>
+        {% for item in items %}
+        <tr>
+            <td>{{item.id}}</td>
+            <td>{{item.name}}</td>
+            <td>{%if item.parent%}{{item.parent.path}}{%endif%}</td>
+            <td>
+                <a href="{{path('admin_category_create',{id: item.id})}}" class="btn btn-secondary">Düzenle</a>
+                <a href="{{path('admin_category_remove',{id: item.id})}}" class="btn btn-danger" onclick="return confirm('Kategoriyi silmek istediğinizden emin misiniz?')">Sil</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>    
+</table>
+{% endblock %}

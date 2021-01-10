@@ -9,6 +9,7 @@
         <tr>
         <th>ID</th>
         <th>Başlık</th>
+        <th>Kategori</th>
         <th>Tarih</th>
         <th>İşlemler</th>
             </tr>
@@ -18,6 +19,7 @@
         <tr>
             <td>{{item.id}}</td>
             <td>{{item.title}}</td>
+            <td>{%if item.category%}{{item.category.path}}{%endif%}</td>
             <td>{{item.createdAt|date}}</td>
             <td>
                 <a href="{{path('admin_blog_create',{id: item.id})}}" class="btn btn-secondary">Düzenle</a>
