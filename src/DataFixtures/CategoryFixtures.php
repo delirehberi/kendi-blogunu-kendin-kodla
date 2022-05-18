@@ -22,6 +22,10 @@ class CategoryFixtures extends Fixture
              ->setParent($mainCategory);
         $manager->persist($category);
 
+        $category2 = new Category();
+        $category2->setName("Demo")
+            ->setSlug("demo");
+        $manager->persist($category2);
         $manager->flush();
     }
 }
